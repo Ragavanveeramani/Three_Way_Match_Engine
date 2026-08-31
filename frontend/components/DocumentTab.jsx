@@ -12,7 +12,7 @@ export default function DocumentTab({ title, docData }) {
   const documentNumber = docData.number || docData.documentNumber || docData.poNumber || docData.invoiceNumber || docData.grnNumber || 'N/A';
   const documentDate = docData.date || docData.poDate || docData.invoiceDate || docData.grnDate || docData.createdAt || 'N/A';
   
-  // Resolve id across possible property variations (_id, id, documentId)
+  // Resolve ID and build file preview URL safely
   const docId = docData._id || docData.id || docData.documentId;
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
   const pdfUrl = docId ? `${apiUrl}/documents/${docId}/file` : null;
@@ -37,6 +37,7 @@ export default function DocumentTab({ title, docData }) {
               <span className="text-gray-800">{docData.vendorName}</span>
             </div>
           )}
+
           {pdfUrl && (
             <div className="pt-2">
               <a 

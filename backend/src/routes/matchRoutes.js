@@ -35,9 +35,9 @@ router.get('/summary/:poNumber', protect, async (req, res) => {
       totalInvoiced,
       totalReceived,
       documents: [
-        ...(po ? [{ _id: po._id, type: 'PO', number: po.poNumber, date: po.poDate }] : []),
-        ...grns.map(g => ({ _id: g._id, type: 'GRN', number: g.grnNumber, date: g.grnDate })),
-        ...invoices.map(i => ({ _id: i._id, type: 'Invoice', number: i.invoiceNumber, date: i.invoiceDate }))
+        ...(po ? [{ _id: po._id.toString(), type: 'PO', number: po.poNumber, date: po.poDate }] : []),
+        ...grns.map(g => ({ _id: g._id.toString(), type: 'GRN', number: g.grnNumber, date: g.grnDate })),
+        ...invoices.map(i => ({ _id: i._id.toString(), type: 'Invoice', number: i.invoiceNumber, date: i.invoiceDate }))
       ]
     });
   } catch (err) {
